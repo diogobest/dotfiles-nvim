@@ -13,13 +13,13 @@ map("n", "<C-p>", function()
   Snacks.picker.files(file_search_opts)
 end, { desc = "Find Files" })
 
-map("n", "<C-\\>", function()
-  Snacks.picker.files(file_search_opts)
-end, { desc = "Find Files" })
+map("n", "<C-\\>", "<leader>e", { remap = true, desc = "Explorer" })
 
 map("n", "<leader>p", function()
   Snacks.picker.files(file_search_opts)
 end, { desc = "Find Files" })
+
+map("n", "<leader><leader>", "<C-^>", { desc = "Last File" })
 
 map("n", "<leader>fg", function()
   Snacks.picker.grep()
@@ -32,6 +32,17 @@ end, { desc = "Buffer Diagnostics" })
 map("n", "<leader>fD", function()
   Snacks.picker.diagnostics()
 end, { desc = "Workspace Diagnostics" })
+
+map("n", "gf", function()
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+    if client:supports_method("textDocument/definition") then
+      vim.lsp.buf.definition()
+      return
+    end
+  end
+
+  vim.cmd("normal! gf")
+end, { desc = "Goto Definition" })
 
 map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
 map("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics (Trouble)" })
