@@ -4,6 +4,13 @@ return {
     opts = {
       servers = {
         rubocop = {
+          init_options = {
+            lintMode = true,
+          },
+          on_attach = function(client)
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+          end,
           root_dir = function(fname)
             local root = require("lspconfig.util").root_pattern("Gemfile", ".git", "docker-compose.yml", "docker-compose.yaml")(fname)
             return root or "/home/dev-sscrop-1/Documentos/sscrop"

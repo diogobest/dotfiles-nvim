@@ -3,6 +3,8 @@
 -- Add any additional options here
 local opt = vim.opt
 
+vim.g.autoformat = false
+
 opt.backspace = { "indent", "eol", "start" }
 opt.backup = false
 opt.writebackup = false
@@ -33,11 +35,12 @@ opt.number = true
 opt.numberwidth = 5
 opt.relativenumber = true
 opt.wildmode = { "list:longest", "list:full" }
-opt.wildignore:append({ "*/tmp/*", "*.so", "*.swp", "*.zip", "*.cache" })
+opt.wildignore:append({ "*/tmp/*", "*/node_modules/*", "*/public/*", "*.so", "*.swp", "*.zip", "*.cache" })
 opt.list = true
 opt.listchars = { tab = "»·", trail = "·", nbsp = "·" }
 opt.spellfile = vim.fn.expand("~/.vim-spell.utf-8.add")
 opt.complete:append("kspell")
+opt.clipboard = ""
 opt.diffopt:append({ "closeoff", "vertical" })
 opt.splitbelow = true
 opt.splitright = true
@@ -47,7 +50,7 @@ opt.background = "dark"
 vim.g.html_indent_tags = "li\\|p"
 
 if vim.fn.executable("rg") == 1 then
-  opt.grepprg = "rg --vimgrep --smart-case"
+  opt.grepprg = "rg --vimgrep --smart-case -g '!public/**' -g '!node_modules/**'"
 elseif vim.fn.executable("ag") == 1 then
   opt.grepprg = "ag --vimgrep --smart-case"
 end

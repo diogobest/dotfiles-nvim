@@ -6,7 +6,13 @@ local map = vim.keymap.set
 local file_search_opts = {
   hidden = true,
   ignored = true,
-  exclude = { ".git", ".hg", ".svn", "vcr_cassettes" },
+  exclude = { ".git", ".hg", ".svn", "vcr_cassettes", "public", "node_modules" },
+}
+
+local grep_search_opts = {
+  hidden = true,
+  ignored = true,
+  exclude = { ".git", ".hg", ".svn", "vcr_cassettes", "public/**", "node_modules/**" },
 }
 
 map("n", "<C-p>", function()
@@ -20,9 +26,15 @@ map("n", "<leader>p", function()
 end, { desc = "Find Files" })
 
 map("n", "<leader><leader>", "<C-^>", { desc = "Last File" })
+-- map("n", "//", "gcc", { remap = true, desc = "Comment Line" })
+-- map("x", "//", "gc", { remap = true, desc = "Comment Selection" })
 
 map("n", "<leader>fg", function()
-  Snacks.picker.grep()
+  Snacks.picker.grep(grep_search_opts)
+end, { desc = "Grep Project" })
+
+map("n", "<leader>sg", function()
+  Snacks.picker.grep(grep_search_opts)
 end, { desc = "Grep Project" })
 
 map("n", "<leader>fd", function()
