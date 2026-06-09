@@ -6,13 +6,13 @@ local map = vim.keymap.set
 local file_search_opts = {
   hidden = true,
   ignored = true,
-  exclude = { ".git", ".hg", ".svn", "vcr_cassettes", "public", "node_modules" },
+  exclude = { ".git", ".hg", ".svn", "vcr_cassettes", "public", "node_modules", "storage", "tmp" },
 }
 
 local grep_search_opts = {
   hidden = true,
   ignored = true,
-  exclude = { ".git", ".hg", ".svn", "vcr_cassettes", "public/**", "node_modules/**" },
+  exclude = { ".git", ".hg", ".svn", "vcr_cassettes", "public/**", "node_modules/**", "storage/**", "tmp/**" },
 }
 
 map("n", "<C-p>", function()
